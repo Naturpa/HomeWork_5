@@ -1,17 +1,36 @@
-package org.example;
+package test;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+//import файлов пакета
+import org.example.InvalidDimensionException;
+import org.example.InvalidHeightException;
+import org.example.InvalidRadiusException;
+import geometry2d.circle;
+import geometry2d.rectangle;
+import geometry3d.cylinder;
+
+//В main создаём объекты классов Circle, Rectangle и Cylinder (правильные и неправильные).
+public class main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        try {
+            //создаем объекты и выводим их
+            circle circle1 = new circle(5);
+            rectangle rectangle1 = new rectangle(4, 6);
+            cylinder cylinder1 = new cylinder(circle1, 10.56);
+            System.out.println(circle1.toString());
+            System.out.println(rectangle1.toString());
+            System.out.println(cylinder1.toString());
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+            //создаем объекты для исключений и проверяем
+            circle circle = new circle(-5);
+            rectangle rectangle = new rectangle(-4, 6);
+            cylinder cylinder = new cylinder(circle, -10);
+
+        } catch (InvalidRadiusException e) {
+            System.out.println(e.getMessage());
+        } catch (InvalidDimensionException e) {
+            System.out.println(e.getMessage());
+        } catch (InvalidHeightException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
